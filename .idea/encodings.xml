@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/modules/contract/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/project/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/project/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/user/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/validity/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/modules/wallet/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/wallet/src/main/java" charset="UTF-8" />
+  </component>
+</project>
