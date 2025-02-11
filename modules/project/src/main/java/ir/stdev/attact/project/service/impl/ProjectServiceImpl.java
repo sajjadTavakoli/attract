@@ -1,5 +1,6 @@
 package ir.stdev.attact.project.service.impl;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import ir.stdev.attact.project.api.dto.CreateProjectRequest;
 import ir.stdev.attact.project.api.dto.CreateProjectResponse;
 import ir.stdev.attact.project.persistence.entity.ProjectEntity;
@@ -7,7 +8,6 @@ import ir.stdev.attact.project.persistence.mapper.ProjectPersistenceMapper;
 import ir.stdev.attact.project.persistence.repository.ProjectRepository;
 import ir.stdev.attact.project.service.api.ProjectServiceApi;
 import ir.stdev.attact.project.service.mapper.ProjectServiceMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +24,8 @@ public class ProjectServiceImpl implements ProjectServiceApi {
     }
 
     @Override
-    public CreateProjectResponse createProject(CreateProjectRequest request) {
+    @CircuitBreaker(name = "projectPersistenceCB")
+        public CreateProjectResponse createProject(CreateProjectRequest request) {
         ProjectEntity projectEntity = projectRepository.save(persistenceMapper.toEntity(serviceMapper.requestToDTO(request)));
         return serviceMapper.dtoToResponse(persistenceMapper.toDTO(projectEntity));
     }

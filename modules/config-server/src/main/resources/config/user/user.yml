@@ -1,3 +1,6 @@
+server:
+  port: 8084
+
 spring:
   application:
     name: user
@@ -14,10 +17,6 @@ spring:
       enabled: true
       path: /h2-console
 
-
-server:
-  port: 8084
-
 eureka:
   instance:
     preferIpAddress: true
@@ -32,3 +31,64 @@ management:
     web:
       exposure:
         include: "*"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      userPersistenceCB:
+        register-health-indicator: true
+        wait-duration-in-open-state: 60s
+        sliding-window-type: count_based
+        sliding-window-size: 10
+        minimum-number-of-calls: 3
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        permitted-number-of-calls-in-half-open-state: 3
+        slow-call-rate-threshold: 100
+        slow-call-duration-threshold: 60s
+        record-exceptions:
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+      userInvokeCB:
+        register-health-indicator: true
+        wait-duration-in-open-state: 5m
+        sliding-window-type: count_based
+        sliding-window-size: 5
+        minimum-number-of-calls: 3
+        failure-rate-threshold: 70
+        automatic-transition-from-open-to-half-open-enabled: true
+        permitted-number-of-calls-in-half-open-state: 5
+        slow-call-rate-threshold: 100
+        slow-call-duration-threshold: 60s
+        record-exceptions:
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+
+  bulkhead:
+    instances:
+      projectPersistenceSemaphoreBulkhead:
+        max-concurrent-calls: 30
+        max-wait-duration: 30s
+
+  thread-pool-bulkhead:
+    instances:
+      projectPersistenceThreadPoolBulkhead:
+        max-thread-pool-size: 50
+        core-thread-pool-size: 30
+        queue-capacity: 50
+        keep-alive-duration: 30s
+
+  retry:
+    instances:
+      projectPersistenceRetry:
+        max-attempts: 3
+        wait-duration: 10s
+        retry-exceptions:
+          - java.util.concurrent.TimeoutException
+
+  ratelimiter:
+    instances:
+      projectPersistenceRateLimiter:
+        timeout-duration: 1s
+        limit-refresh-period: 500
+        limit-for-period: 2
