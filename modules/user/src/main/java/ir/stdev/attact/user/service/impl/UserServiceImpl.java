@@ -8,20 +8,16 @@ import ir.stdev.attact.user.persistence.mapper.UserPersistenceMapper;
 import ir.stdev.attact.user.persistence.repository.UserRepository;
 import ir.stdev.attact.user.service.api.UserServiceApi;
 import ir.stdev.attact.user.service.mapper.UserServiceMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserServiceApi {
 
     private final UserRepository userRepository;
     private final UserPersistenceMapper persistenceMapper;
     private final UserServiceMapper serviceMapper;
-
-    public UserServiceImpl(UserRepository userRepository, UserPersistenceMapper persistenceMapper, UserServiceMapper serviceMapper) {
-        this.userRepository = userRepository;
-        this.persistenceMapper = persistenceMapper;
-        this.serviceMapper = serviceMapper;
-    }
 
     @Override
     @CircuitBreaker(name = "userPersistenceCB" , fallbackMethod = "buildFallback")
@@ -30,7 +26,7 @@ public class UserServiceImpl implements UserServiceApi {
         return persistenceMapper.toUserDTO(user);
     }
 
-    private UserDTO buildFallback(UserDTO userDTO) {
+    private UserDTO buildFallback(CreateUserRequest request) {
         return UserDTO.builder().build();
     }
 }

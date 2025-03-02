@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UserFacade {
 
-    String PATH = "/project";
+    String PATH = "/user";
 
     @PostMapping(value = "/" , produces = MediaType.APPLICATION_JSON_VALUE)
     UserDTO createUser(@RequestBody CreateUserRequest request);
