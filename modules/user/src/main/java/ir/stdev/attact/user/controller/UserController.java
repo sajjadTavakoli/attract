@@ -22,7 +22,7 @@ public class UserController implements UserFacade {
 
     @Override
     public UserDTO getUser(String id) {
-        return null;
+        return UserDTO.builder().build();
     }
 
     @Override

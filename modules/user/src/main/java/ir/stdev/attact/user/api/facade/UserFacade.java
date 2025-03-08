@@ -18,6 +18,6 @@ public interface UserFacade {
     @GetMapping(value = "/getById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserDTO getUser(@PathVariable String id);
 
-    @GetMapping(value = "/getById/{nationalCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/getByNationalCode/{nationalCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserDTO getUserByNationalCode (@PathVariable String nationalCode);
 }
