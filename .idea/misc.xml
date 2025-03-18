@@ -10,10 +10,15 @@
         <option value="$PROJECT_DIR$/modules/wallet/pom.xml" />
         <option value="$PROJECT_DIR$/modules/contract/pom.xml" />
         <option value="$PROJECT_DIR$/modules/validity/pom.xml" />
+        <option value="$PROJECT_DIR$/modules/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/modules/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/modules/eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/modules/gateway-server/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/modules/demo/pom.xml" />
         <option value="$PROJECT_DIR$/wallet/pom.xml" />
       </set>
     </option>

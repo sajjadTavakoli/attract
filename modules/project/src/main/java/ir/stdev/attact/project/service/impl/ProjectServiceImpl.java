@@ -8,20 +8,16 @@ import ir.stdev.attact.project.persistence.mapper.ProjectPersistenceMapper;
 import ir.stdev.attact.project.persistence.repository.ProjectRepository;
 import ir.stdev.attact.project.service.api.ProjectServiceApi;
 import ir.stdev.attact.project.service.mapper.ProjectServiceMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class ProjectServiceImpl implements ProjectServiceApi {
 
     private final ProjectServiceMapper serviceMapper;
     private final ProjectPersistenceMapper persistenceMapper;
     private final ProjectRepository projectRepository;
-
-    public ProjectServiceImpl(ProjectServiceMapper serviceMapper, ProjectPersistenceMapper persistenceMapper , ProjectRepository projectRepository) {
-        this.serviceMapper = serviceMapper;
-        this.persistenceMapper = persistenceMapper;
-        this.projectRepository = projectRepository;
-    }
 
     @Override
     @CircuitBreaker(name = "projectPersistenceCB")
