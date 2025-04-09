@@ -17,6 +17,12 @@ spring:
       enabled: true
       path: /h2-console
 
+springdoc:
+  api-docs:
+    path: /api-doc
+  swagger-ui:
+    path: /swagger-ui
+
 eureka:
   instance:
     preferIpAddress: true
